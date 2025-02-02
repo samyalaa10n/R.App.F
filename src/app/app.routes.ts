@@ -7,6 +7,7 @@ import { MangementComponent } from './Modules/FactoryBase/Mangement/Mangement.co
 import { EmployesComponent } from './Modules/HR/Employes/Employes.component';
 import { EffectInSystemComponent } from './Modules/HR/EffectInSystem/EffectInSystem.component';
 import { ColumnEffectComponent } from './Modules/HR/ColumnEffect/ColumnEffect.component';
+import { EffectComponent } from './Modules/HR/Effect/Effect.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'Main', title: "الرئيسية", pathMatch: "full" },
@@ -18,6 +19,7 @@ export const routes: Routes = [
             { path: 'Employes',title:'الموظفين', component: EmployesComponent },
             { path: 'Companies',title:'الشركات', component: CompanyComponent },
             { path: 'Places',title:'اماكن العمل', component: PlaceComponent },
+            { path: 'Effects',title:'المؤثرات', component: EffectComponent },
             { path: 'Departs',title:'الأقسام', component: DepartComponent },
         ]
     },

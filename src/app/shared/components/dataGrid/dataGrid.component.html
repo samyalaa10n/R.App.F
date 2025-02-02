@@ -6,33 +6,36 @@
         [(selection)]="selectedItems" [loading]="IsLoading" [columns]="selectedColumns" [reorderableColumns]="true"
         [metaKeySelection]="singleSelectedMode" paginatorDropdownAppendTo="body">
         <ng-template #caption>
-            <div class="my-1">
-                <ng-content select="[header]"></ng-content>
-                <ng-content select="[btn]"></ng-content>
-            </div>
-            <div class="flex py-1">
-                <app-multiselect *ngIf="canSlectedSomeColumns" [style]="{'width': '250px'}" display="comma"
-                    placeholder="اختر الأعمدة" [dataSource]="Columns" [(dataSelected)]="selectedColumns"
-                    (dataSelectedChange)="editFilterWork()" optionLabel="header"
-                    selectedItemsLabel="تم تحديد {0} أعمدة"></app-multiselect>
-                <p-iconfield *ngIf="AllowSearch" iconPosition="left" class="ml-auto">
-                    <p-inputicon>
-                        <i class="pi pi-search"></i>
-                    </p-inputicon>
-                    <input class="mx-1" pInputText type="text" (input)="globalFilter(dt,$event)" placeholder="بحث" />
-                    <p-button label="" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt)" />
-                </p-iconfield>
-            </div>
-            <ng-content select="[header-body]"></ng-content>
-            <div class="my-2">
-                <p-button *ngIf="AllowUpdate" label="تحديث" severity="contrast" class=" font-bold mx-1"
-                    icon="pi pi-sync" (click)="onUpdate(dt)" />
-                <p-button *ngIf="AllowAdd" label="اضافة" class=" font-bold mx-1" icon="pi pi-plus"
-                    (click)="AddNew(dt)" />
-                <p-button *ngIf="AllowSave" btn class="px-1" label="حفظ" icon="pi pi-save"
-                    (click)="onSaveChanges()"></p-button>
-                <p-button *ngIf="AllowDeleteSelected" label="حذف المحدد" class=" font-bold mx-1" icon="pi pi-trash"
-                    (click)="DeleteSelectedData()" />
+            <div *ngIf="AllowHeaderTemplate">
+                <div class="my-1">
+                    <ng-content select="[header]"></ng-content>
+                    <ng-content select="[btn]"></ng-content>
+                </div>
+                <div class="flex py-1">
+                    <app-multiselect *ngIf="canSlectedSomeColumns" [style]="{'width': '250px'}" display="comma"
+                        placeholder="اختر الأعمدة" [dataSource]="Columns" [(dataSelected)]="selectedColumns"
+                        (dataSelectedChange)="editFilterWork()" optionLabel="header"
+                        selectedItemsLabel="تم تحديد {0} أعمدة"></app-multiselect>
+                    <p-iconfield *ngIf="AllowSearch" iconPosition="left" class="ml-auto">
+                        <p-inputicon>
+                            <i class="pi pi-search"></i>
+                        </p-inputicon>
+                        <input class="mx-1" pInputText type="text" (input)="globalFilter(dt,$event)"
+                            placeholder="بحث" />
+                        <p-button label="" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt)" />
+                    </p-iconfield>
+                </div>
+                <ng-content select="[body]"></ng-content>
+                <div class="my-2">
+                    <p-button *ngIf="AllowUpdate" label="تحديث" severity="contrast" class=" font-bold mx-1"
+                        icon="pi pi-sync" (click)="onUpdate(dt)" />
+                    <p-button *ngIf="AllowAdd" label="اضافة" class=" font-bold mx-1" icon="pi pi-plus"
+                        (click)="AddNew(dt)" />
+                    <p-button *ngIf="AllowSave" btn class="px-1" label="حفظ" icon="pi pi-save"
+                        (click)="onSaveChanges()"></p-button>
+                    <p-button *ngIf="AllowDeleteSelected" label="حذف المحدد" class=" font-bold mx-1" icon="pi pi-trash"
+                        (click)="DeleteSelectedData()" />
+                </div>
             </div>
         </ng-template>
         <ng-template #header let-columns>
@@ -124,7 +127,7 @@
                     <!-- <p-togglebutton [(ngModel)]="item[column.name]" onLabel="نعم" offLabel="لا" styleClass="w-24" /> -->
                     }
                     @case ("dateTime") {
-                        <app-DateTime [(selectedDate)]="item[column.name]"></app-DateTime>
+                    <app-DateTime [(selectedDate)]="item[column.name]"></app-DateTime>
                     }
                     @case ("number") {
                     <p-inputnumber [(ngModel)]="item[column.name]" mode="decimal" />
@@ -168,4 +171,5 @@
             </tr>
         </ng-template>
     </p-table>
+    <ng-content select="[footer]"></ng-content>
 </div>

@@ -5,3 +5,6 @@
     margin: 0px;
     padding: 0px;
 }
+.p-dialog-header{
+    justify-content: end !important;
+}

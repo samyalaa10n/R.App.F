@@ -90,7 +90,7 @@ export class NaveComponent implements OnInit {
                 label: 'مؤثرات الموظفين',
                 icon: 'pi pi-database',
                 command: (event) => {
-                  this._router.navigate(['Main', 'Companies']);
+                  this._router.navigate(['Main', 'Effects']);
                 },
               }
             ]

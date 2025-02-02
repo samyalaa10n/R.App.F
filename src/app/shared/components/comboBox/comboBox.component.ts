@@ -25,9 +25,12 @@ export class ComboBoxComponent implements OnInit {
   ngOnInit() {
   }
   ngOnChanges() {
-    this.selected = this.dataSource.find(x => x[this.optionValue] == this.SelectedValue)
+    if (this.optionValue != "") {
+      this.selected = this.dataSource.find(x => x[this.optionValue] == this.SelectedValue)
+    }
   }
   selectedItem(item: any) {
+    
     this.selectedChange.emit(item);
     if (item[this.optionValue] != undefined) {
       this.SelectedValueChange.emit(item[this.optionValue]);

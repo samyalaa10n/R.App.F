@@ -71,6 +71,7 @@ export class DataGridComponent implements OnInit {
   childrenGrid: Array<ChildGrid> = []
   @Input() AllowSave: boolean = true;
   @Input() IsLoading: boolean = false;
+  @Input() AllowHeaderTemplate: boolean = true;
   @Input() AllowDelete: boolean = true;
   @Input() AllowUpdate: boolean = true;
   @Input() AllowSearch: boolean = true;

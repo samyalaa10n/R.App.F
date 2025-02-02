@@ -19,12 +19,6 @@ export class ColumnEffectComponent implements OnInit {
     this.Columns.push(new Column("COLUMN_NAME","اسم البند","text","text",200))
     this.Columns.push(new Column("TYPE","نوع البند","comboBox","comboBox",200))
     this.Columns[2].columnComboBoxDataSource=[
-      {"ID":1,"NAME":"كود موظف"},
-      {"ID":2,"NAME":"اسم موظف"},
-      {"ID":3,"NAME":"قسم موظف"},
-      {"ID":4,"NAME":"مكان عمل"},
-      {"ID":5,"NAME":"وظيفة"},
-      {"ID":6,"NAME":"قيمة رقمية"},
       {"ID":7,"NAME":"نص تفصيلي"},
       {"ID":8,"NAME":"تاريخ"},
       {"ID":9,"NAME":"نص صغير"},
