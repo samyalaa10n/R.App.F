@@ -1,0 +1,14 @@
+<div dir="rtl">
+  <p-multiselect [placeholder]="placeholder"  emptyMessage="لا يوجد بيانات" emptyFilterMessage="لا يوجد"  (ngModelChange)="change($event)" [display]="display"
+    [appendTo]="appendTo" [maxSelectedLabels]="maxSelectedLabels" [optionLabel]="optionLabel"
+    [selectedItemsLabel]="selectedItemsLabel" [options]="dataSource" [(ngModel)]="dataSelected" [style]="style">
+    <ng-template #header>
+      <div class="font-medium px-3 py-2">{{textHeader}}</div>
+    </ng-template>
+    <ng-template let-Item #item>
+      <div class="d-block" style="text-align: center; width: 100%; text-wrap: auto;">
+        {{ Item[optionLabel] }}
+      </div>
+    </ng-template>
+  </p-multiselect>
+</div>

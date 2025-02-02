@@ -1,0 +1,6 @@
+<div dir="rtl">
+  <p-dropdown appendTo="body" [(ngModel)]="selected" (ngModelChange)="selectedItem($event)" (onClear)="clear()"
+    [showClear]="true" emptyMessage="لا يوجد بيانات" [filter]="optionLabel" [placeholder]="placeholder"
+    [optionLabel]="optionLabel" [options]="dataSource" emptyFilterMessage="لا يوجد">
+  </p-dropdown>
+</div>

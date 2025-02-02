@@ -1,0 +1,38 @@
+::ng-deep .p-select-clear-icon {
+    left: 10px !important;
+    right: unset !important;
+}
+
+::ng-deep .p-select-label {
+    padding-right: 10px !important;
+}
+
+::ng-deep p-dropdown {
+    position: relative;
+    min-width: 200px;
+}
+
+::ng-deep [pinputtext] {
+    direction: rtl !important;
+}
+
+::ng-deep p-iconfield p-inputicon {
+    left: 8px !important;
+}
+
+::ng-deep p-dropdownitem li {
+    direction: rtl !important;
+}
+
+::ng-deep .p-select-empty-message {
+    text-align: center;
+}
+
+::ng-deep .p-select {
+    display: flex !important;
+    flex-flow: row-reverse !important;
+}
+
+::ng-deep .p-select-overlay {
+    width: 100% !important;
+}

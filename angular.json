@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "sass"
+          "style": "css"
         }
       },
       "root": "",
@@ -24,7 +24,7 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "sass",
+            "inlineStyleLanguage": "css",
             "assets": [
               {
                 "glob": "**/*",
@@ -32,7 +32,9 @@
               }
             ],
             "styles": [
-              "src/styles.sass"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "src/styles.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -88,7 +90,7 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "sass",
+            "inlineStyleLanguage": "css",
             "assets": [
               {
                 "glob": "**/*",
@@ -96,12 +98,15 @@
               }
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "5a5aef75-658d-40e7-84d2-980241a56692"
   }
 }
