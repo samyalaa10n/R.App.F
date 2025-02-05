@@ -1,9 +1,14 @@
 <div class="my-1 fs-6 fw-bold  px-2 py-1 text-end">
+  <app-EmployeSelection (onSelected)="afterSelected($event)" ></app-EmployeSelection>
   <div class="my-2">
     <app-comboBox [dataSource]="effects"   optionLabel="NAME" placeholder="اختر المؤثر"
     (selectedChange)="selectChange($event)"></app-comboBox>
   </div>
- <app-EmployeSelection></app-EmployeSelection>
+</div>
+<div *ngIf="effectSelected">
+  @for (item of effectSelected.COLUMNS; track $index) {
+  
+  }
 </div>
 <!-- <app-dataGrid #grid>
   <div class="header my-1 fs-6 fw-bold  px-2 py-1 text-end" header>

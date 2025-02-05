@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { DataGridComponent } from '../../../shared/components/dataGrid/dataGrid.component';
 import { Tools } from '../../../shared/service/Tools';
 import { ComboBoxComponent } from "../../../shared/components/comboBox/comboBox.component";
@@ -14,7 +14,9 @@ import { ButtonModule } from 'primeng/button';
 })
 export class EmployeSelectionComponent implements OnInit {
   Departs: Array<any> = [];
+  LABEL: string = "بحث عن موظف"
   showDailog: boolean = false;
+  @Output() onSelected: EventEmitter<any> = new EventEmitter();
   @ViewChild('grid') grid!: DataGridComponent
   constructor(private _tools: Tools) { }
   async ngOnInit() {
@@ -22,7 +24,6 @@ export class EmployeSelectionComponent implements OnInit {
   }
   ngAfterViewInit() {
     this._tools.waitExecuteFunction(100, () => {
-
       this.grid.AllowDelete = false;
       this.grid.AllowSave = false;
       this.grid.AllowSearch = false;
@@ -30,15 +31,32 @@ export class EmployeSelectionComponent implements OnInit {
       this.grid.AllowAdd = false;
       this.grid.AllowDeleteSelected = false;
       this.grid.canSlectedSomeColumns = false;
-      this.grid.AllowHeaderTemplate=false;
+      this.grid.AllowHeaderTemplate = false;
       this.grid.Columns.push(new Column("CODE", "كود الموظف"));
       this.grid.Columns.push(new Column("NAME", "اسم الموظف"));
+      this.grid.Columns.push(new Column("Depart", "قسم الموظف"));
       this.grid.Columns = this.grid.Columns;
+      this.grid.onChangSelect = (e) => {
+        if (this.grid.selectedItems.length > 0) {
+          this.LABEL = ` تم تحديد ${this.grid.selectedItems.length} موظف`
+        }
+        else {
+          this.LABEL = "بحث عن موظف"
+        }
+      }
     });
   }
   async SelectedChange(selected: any) {
     let employesSelectes = await this._tools.getAsync(`Employee/GetEmployesByDepartId?DepartId=${selected.ID}`) as Array<any>
-    this.grid.dataSource = employesSelectes;
+    if (employesSelectes) {
+      employesSelectes.forEach(x => x.Depart = selected.NAME)
+      this.grid.dataSource = employesSelectes;
+    }
   }
+  selectedData() {
+    this.showDailog = false;
+    this.onSelected.emit(this.grid.selectedItems)
+  }
+ 
 
 }

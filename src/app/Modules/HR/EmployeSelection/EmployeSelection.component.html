@@ -1,13 +1,13 @@
-<p-button label="بحث عن موظف" icon="pi pi-search" (onClick)="showDailog=true;"></p-button>
-<p-dialog [(visible)]="showDailog" [maximizable]="true" header="تحديد الموظفين" [modal]="true"
-[style]="{ width: '25rem' }" >
+<p-button [label]="LABEL" icon="pi pi-search" (onClick)="showDailog=true;"></p-button>
+<p-dialog [(visible)]="showDailog"  [maximizable]="true" header="تحديد الموظفين" [modal]="true"
+ [style]="{ width: '50rem' }" >
   <div dir="rtl" style="height: 100%; overflow: auto; width: 100%;" >
     <div class="d-flex flex-wrap" >
       <div class="my-2" style="width: 200px;" header>
         <app-comboBox [dataSource]="Departs" placeholder="اختر القسم" optionLabel="NAME"
           (selectedChange)="SelectedChange($event)"></app-comboBox>
       </div>
-      <p-button class="my-auto me-2" label="تم التحديد" (onClick)="showDailog=false;"></p-button>
+      <p-button class="my-auto me-2" label="تم التحديد" (onClick)="selectedData()"></p-button>
     </div>
     <div class="my-2">
       <app-dataGrid #grid></app-dataGrid>

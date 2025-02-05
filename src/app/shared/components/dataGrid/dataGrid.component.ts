@@ -102,7 +102,7 @@ export class DataGridComponent implements OnInit {
     plus = this.canReOrder ? plus + 1 : plus;
     return this.Columns.length + plus
   }
-
+  
   constructor(private _tools: Tools, private el: ElementRef<HTMLElement>) { }
   ngOnInit() {
     this.canSelectRow = this.AllowDeleteSelected
@@ -114,7 +114,7 @@ export class DataGridComponent implements OnInit {
 
   }
   ngAfterViewInit() {
-    this.editFilterWork()
+    // this.editFilterWork()
     this.el.nativeElement.addEventListener("keydown", (e) => {
       if (!(e.target as HTMLElement).classList.contains("inputText")) {
         this.pInputTextKeyDown(e, { value: "" }, null);
@@ -138,40 +138,40 @@ export class DataGridComponent implements OnInit {
       this.ParentGrid.onLoadedChildDataGrid(this.ParentGrid, grid.dataGrid, grid.item)
     }
   }
-  editFilterWork() {
-    this._tools.waitExecuteFunction(200, () => {
-      if (this.columnFilters) {
-        Array.from(this.columnFilters).forEach(columnFilter => {
-          let txtInput = ((columnFilter.el.nativeElement as HTMLElement).querySelector('[pinputtext]') as HTMLElement);
-          if (txtInput) {
-            txtInput.oninput = (e: Event) => {
-              if (e.target) {
-                const enterEvent = new KeyboardEvent('keydown', {
-                  key: 'Enter', // Key identifier
-                  code: 'Enter', // Physical key on the keyboard
-                  keyCode: 13, // Numeric code for Enter key
-                  which: 13, // Compatibility for older browsers
-                  bubbles: true, // Allow the event to bubble up the DOM
-                  cancelable: true // Allow event cancellation
-                });
-                (e.target as HTMLElement).dispatchEvent(enterEvent);
-              }
-            }
-          }
-        })
-        this.tableStyle.width = this.Columns.map(x => x.width).reduce((a, b) => a + b, 200) + 'px'
-        let table = this.el.nativeElement.querySelector('table');
-        if (table) {
-          table.style.width = this.Columns.map(x => x.width).reduce((a, b) => a + b, 200) + 'px';
-          let thead = this.el.nativeElement.querySelector('thead') as HTMLElement
-          if (thead) {
-            thead.style.zIndex = this.ParentGrid ? (this.ParentGrid.ParentZIndex - 1 + '') : (this.ParentZIndex + '')
-          }
-        }
-      }
-    })
+  // editFilterWork() {
+  //   this._tools.waitExecuteFunction(200, () => {
+  //     if (this.columnFilters) {
+  //       Array.from(this.columnFilters).forEach(columnFilter => {
+  //         let txtInput = ((columnFilter.el.nativeElement as HTMLElement).querySelector('[pinputtext]') as HTMLElement);
+  //         if (txtInput) {
+  //           txtInput.oninput = (e: Event) => {
+  //             if (e.target) {
+  //               const enterEvent = new KeyboardEvent('keydown', {
+  //                 key: 'Enter', // Key identifier
+  //                 code: 'Enter', // Physical key on the keyboard
+  //                 keyCode: 13, // Numeric code for Enter key
+  //                 which: 13, // Compatibility for older browsers
+  //                 bubbles: true, // Allow the event to bubble up the DOM
+  //                 cancelable: true // Allow event cancellation
+  //               });
+  //               (e.target as HTMLElement).dispatchEvent(enterEvent);
+  //             }
+  //           }
+  //         }
+  //       })
+  //       this.tableStyle.width = this.Columns.map(x => x.width).reduce((a, b) => a + b, 200) + 'px'
+  //       let table = this.el.nativeElement.querySelector('table');
+  //       if (table) {
+  //         table.style.width = this.Columns.map(x => x.width).reduce((a, b) => a + b, 200) + 'px';
+  //         let thead = this.el.nativeElement.querySelector('thead') as HTMLElement
+  //         if (thead) {
+  //           thead.style.zIndex = this.ParentGrid ? (this.ParentGrid.ParentZIndex - 1 + '') : (this.ParentZIndex + '')
+  //         }
+  //       }
+  //     }
+  //   })
 
-  }
+  // }
   DeleteSelectedData() {
     this.dataSource = this.dataSource.filter(x => this.selectedItems.includes(x) == false);
     this.dt.reset();
@@ -239,5 +239,9 @@ export class DataGridComponent implements OnInit {
   }
   editFilterMultiSelectValues(selectedSource: Array<any>, optionValue: string): Array<any> {
     return selectedSource.map(x => x[optionValue])
+  }
+  onChangSelect(e:any)
+  {
+
   }
 }

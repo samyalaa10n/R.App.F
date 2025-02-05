@@ -5,12 +5,13 @@ import { Tools } from '../../../shared/service/Tools';
 import { ComboBoxComponent } from "../../../shared/components/comboBox/comboBox.component";
 import { Column } from '../../../shared/components/dataGrid/Column';
 import { EmployeSelectionComponent } from "../EmployeSelection/EmployeSelection.component";
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-Effect',
   templateUrl: './Effect.component.html',
   styleUrls: ['./Effect.component.css'],
-  imports: [DataGridComponent, ComboBoxComponent, EmployeSelectionComponent]
+  imports: [DataGridComponent, ComboBoxComponent, EmployeSelectionComponent,NgIf]
 })
 export class EffectComponent implements OnInit {
   @ViewChild('grid') grid!: DataGridComponent
@@ -18,6 +19,8 @@ export class EffectComponent implements OnInit {
   colsInfo: Array<any> = [];
   empeloyee: Array<any> = [];
   Columns: Array<Column> = [];
+  selectedEmployee:Array<any>=[];
+  effectSelected={"COLUMNS":[],}
   constructor(private _tools: Tools) { }
 
   async ngOnInit() {
@@ -28,13 +31,16 @@ export class EffectComponent implements OnInit {
 
   async selectChange(effect: any) {
     this.Columns = [];
-    (effect.COLUMNS as Array<any>).forEach((col, index) => {
-      let columnG = new Column(`row_${this.ColumnInfo(col).ID}`, this.ColumnInfo(col).COLUMN_NAME)
-      this.getTypeColumn(col, columnG)
-      this.Columns.push(columnG)
+    (effect.COLUMNS as Array<any>).forEach((col, index)=>{
+      console.log(this.ColumnInfo(col))
     })
-    this.grid.Columns = this.Columns
-    this.grid.dataSource = [];
+    // (effect.COLUMNS as Array<any>).forEach((col, index) => {
+    //   let columnG = new Column(`row_${this.ColumnInfo(col).ID}`, this.ColumnInfo(col).COLUMN_NAME)
+    //   this.getTypeColumn(col, columnG)
+    //   this.Columns.push(columnG)
+    // })
+    // this.grid.Columns = this.Columns
+    // this.grid.dataSource = [];
   }
   ColumnInfo(col: any) {
     return this.colsInfo.find(x => x.ID == col.EFFECT_COLUMN_ID);
@@ -42,5 +48,9 @@ export class EffectComponent implements OnInit {
   getTypeColumn(col: any, column: Column) {
     column.columnType = "text";
     column.width = 100;
+  }
+  afterSelected(e:any)
+  {
+    this.selectedEmployee=e;
   }
 }
